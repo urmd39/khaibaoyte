@@ -1,0 +1,31 @@
+GET /list/person						=> list []bson.M (danh sách thông tin cá nhân)
+GET /list/province						=> list []bson.M (danh sách tỉnh)
+GET /list/town?province={str} 			=> list []bson.M (danh sách quận/huyện thuộc tỉnh)
+GET /list/village?town={str}			=> list []bson.M (danh sách xã/phường thuộc quận/huyện)
+GET /list/nationality					=> list []bson.M (danh sách quốc tịch)
+GET /list/question						=> list []bson.M (danh sách câu hỏi)
+GET /list/answer?quest_id={str} 		=> list []bson.M (danh sách câu trả lời cho câu hỏi)
+GET /list/health_declaration			=> danh sách các bản khai báo y tế
+GET /list/health_declaration/filter?travel-location-id={address_id}&time-start={timestart}&time-end={timeend}
+	=> danh sách những người đã đến 1 địa chỉ trong khoảng thời gian
+... (có thể bổ sung 1 vài filter khác)
+
+
+GET /person/{id}						=> person bson.M
+POST /person							=> person bson.M (create và show ra thông tin cá nhân vừa được tạo)
+	body: person (json)
+PUT /person/{id}						=> person bson.M (update và show ra thông tin sau khi update)
+	body: person (json)
+
+POST /health_declaration				=> create và show ra bản khai báo y tế vừa được tạo
+	body: health_declaration (json)
+GET /heath_declaration/{id}				=> show bản khai báo y tế theo id
+PUT /health_declaration/{id}			=> update và show bản khai báo y tế sau khi update
+	body: health_declaration (json)
+
+POST /health_declaration/question		=> create và show ra câu hỏi vừa được thêm
+GET /health_declaration/question/{id}	=> show câu hỏi theo id
+PUT /health_declaration/question/{id}	=> update câu hỏi 
+	body: question (json)
+	
+
