@@ -1,2 +1,2 @@
 # khaibaoyte
-First version api khai báo y tế
+First version api Health Declaration
