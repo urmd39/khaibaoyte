@@ -1,0 +1,76 @@
+[{
+  "_id": {
+    "$oid": "61020eeabff002a71c98ce01"
+  },
+  "person_id": {
+    "$oid": "6100440d68f6a50b4fcb0a50"
+  },
+  "health_declaration": [
+    {
+      "question_id": {
+        "$oid": "61020db4bff002a71c98cdfe"
+      },
+      "answer": [
+        "Sốt",
+        "Ho"
+      ]
+    },
+    {
+      "question_id": {
+        "$oid": "61020e2cbff002a71c98ce00"
+      },
+      "answer": [
+        ""
+      ]
+    }
+  ],
+  "created_on": "15/06/2021",
+  "note": "",
+  "travel_itinerary": [
+    {
+      "day_start": "20/05/2021",
+      "day_end": "01/06/2021",
+      "address": {
+        "province": "Vĩnh Phúc",
+        "town ": "Bình Xuyên",
+        "village": "Quất Lưu"
+      }
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "610276fe4617cc63c34d3cae"
+  },
+  "note": "",
+  "person_id": "61027950798279146338b508",
+  "travel_itinerary": [
+    {
+      "address": {
+        "province": "Vĩnh Phúc",
+        "town ": "Bình Xuyên",
+        "village": "Quất Lưu"
+      },
+      "day_end": "01/06/2021",
+      "day_start": "20/05/2021"
+    }
+  ],
+  "created_on": "21/07/2021",
+  "health_declaration": [
+    {
+      "answer": [],
+      "question_id": "61020db4bff002a71c98cdfe"
+    },
+    {
+      "answer": [
+        "Người từ nước có bệnh COVID-19"
+      ],
+      "question_id": "61020e2cbff002a71c98ce00"
+    },
+    {
+      "answer": [
+        "Bệnh phổi mãn tính"
+      ],
+      "question_id": "61021c27bff002a71c98ce06"
+    }
+  ]
+}]

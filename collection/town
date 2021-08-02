@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "6100315268f6a50b4fcb0a43"
+  },
+  "name": "Hà Đông",
+  "province": "Hà Nội"
+},{
+  "_id": {
+    "$oid": "610031e768f6a50b4fcb0a47"
+  },
+  "name": "Bình Xuyên",
+  "province": "Vĩnh Phúc"
+}]

@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "6100244c68f6a50b4fcb0a3d"
+  },
+  "name": "Việt Nam"
+},{
+  "_id": {
+    "$oid": "6100246068f6a50b4fcb0a3e"
+  },
+  "name": "Trung Quốc"
+}]

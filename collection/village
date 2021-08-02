@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "61003aeb68f6a50b4fcb0a4a"
+  },
+  "name": "Nguyễn Trãi",
+  "town": "Hà Đông",
+  "province": "Hà Nội"
+},{
+  "_id": {
+    "$oid": "61003b1068f6a50b4fcb0a4b"
+  },
+  "name": "Quất Lưu",
+  "town": "Bình Xuyên",
+  "province": "Vĩnh Phúc"
+}]

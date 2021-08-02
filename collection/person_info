@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "6100440d68f6a50b4fcb0a50"
+  },
+  "name": "HTV",
+  "sex": "Nam",
+  "birthday": "26/03/1996",
+  "address": {
+    "province": "Hà Nội",
+    "town": "Hà Đông",
+    "village": "Nguyễn Trãi",
+    "street": "Số 33 đường Trần Phú"
+  },
+  "identity_card": "0123456789",
+  "phone_number": "0123456789",
+  "email": "",
+  "nationality": "Việt Nam"
+},{
+  "_id": {
+    "$oid": "61027950798279146338b508"
+  },
+  "sex": "Nam",
+  "address": {
+    "town": "Bình Xuyên",
+    "village": "Quất Lưu",
+    "province": "Vĩnh Phúc",
+    "street": ""
+  },
+  "birthday": "05/05/1995",
+  "email": "",
+  "identity_card": "0123456987",
+  "name": "QWERTY",
+  "nationality": "Việt Nam",
+  "phone_number": "0123456987"
+}]
