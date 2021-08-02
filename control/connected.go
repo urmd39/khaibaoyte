@@ -10,11 +10,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-var mongo_uri = `mongodb://127.0.0.1:27017/?compressors=zlib&readPreference=primary&
-gssapiServiceName=mongodb&appname=MongoDB%20Compass&ssl=false`
+// var mongo_uri = `mongodb://127.0.0.1:27017/?compressors=zlib&readPreference=primary&
+// 	gssapiServiceName=mongodb&appname=MongoDB%20Compass&ssl=false`
+
+var mongo_uri_atlas = `mongodb+srv://urmd39:model.kn2412@cluster0.vovio.mongodb.net/test?
+	authSource=admin&replicaSet=atlas-t75pz3-shard-0&readPreference=primary&
+	appname=MongoDB%20Compass&ssl=true`
 
 func Connected() (*mongo.Client, context.Context) {
-	client, err := mongo.NewClient(options.Client().ApplyURI(mongo_uri))
+	client, err := mongo.NewClient(options.Client().ApplyURI(mongo_uri_atlas))
 	if err != nil {
 		log.Fatal(err)
 	}
