@@ -1,0 +1,528 @@
+basePath: /
+definitions:
+  entities.Address:
+    properties:
+      province:
+        type: string
+      town:
+        type: string
+      village:
+        type: string
+    type: object
+  entities.AddressFull:
+    properties:
+      province:
+        type: string
+      street:
+        type: string
+      town:
+        type: string
+      village:
+        type: string
+    type: object
+  entities.Gender:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+    type: object
+  entities.HealthDeclaration:
+    properties:
+      _id:
+        type: string
+      createdOn:
+        type: string
+      healthDeclaration:
+        items:
+          $ref: '#/definitions/entities.Question'
+        type: array
+      note:
+        type: string
+      personId:
+        type: string
+      travelItinerary:
+        items:
+          $ref: '#/definitions/entities.TravelItinerary'
+        type: array
+    type: object
+  entities.HealthDeclarationWithoutId:
+    properties:
+      createdOn:
+        type: string
+      healthDeclaration:
+        items:
+          $ref: '#/definitions/entities.Question'
+        type: array
+      note:
+        type: string
+      personId:
+        type: string
+      travelItinerary:
+        items:
+          $ref: '#/definitions/entities.TravelItinerary'
+        type: array
+    type: object
+  entities.Nationality:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+    type: object
+  entities.Person:
+    properties:
+      _id:
+        type: string
+      address:
+        $ref: '#/definitions/entities.AddressFull'
+      birthday:
+        type: string
+      email:
+        type: string
+      identityCard:
+        type: string
+      name:
+        type: string
+      nationality:
+        type: string
+      phoneNumber:
+        type: string
+      sex:
+        type: string
+    type: object
+  entities.PersonWithoutId:
+    properties:
+      address:
+        $ref: '#/definitions/entities.AddressFull'
+      birthday:
+        type: string
+      email:
+        type: string
+      identityCard:
+        type: string
+      name:
+        type: string
+      nationality:
+        type: string
+      phoneNumber:
+        type: string
+      sex:
+        type: string
+    type: object
+  entities.Province:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+    type: object
+  entities.Question:
+    properties:
+      _id:
+        type: string
+      answer:
+        items:
+          type: string
+        type: array
+      question:
+        type: string
+    type: object
+  entities.QuestionWithoutId:
+    properties:
+      answer:
+        items:
+          type: string
+        type: array
+      question:
+        type: string
+    type: object
+  entities.Town:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+      province:
+        type: string
+    type: object
+  entities.TravelItinerary:
+    properties:
+      address:
+        $ref: '#/definitions/entities.Address'
+      dayEnd:
+        type: string
+      dayStart:
+        type: string
+    type: object
+  entities.Village:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+      province:
+        type: string
+      town:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a service for health declaration
+  title: Health Declarations API
+  version: "1.0"
+paths:
+  /api/v1/genders:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all genders
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Gender'
+            type: array
+      summary: Get details of all genders
+      tags:
+      - genders
+  /api/v1/health-declarations:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all health declarations
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.HealthDeclaration'
+            type: array
+      summary: Get details of all health declarations
+      tags:
+      - health-declarations
+    post:
+      consumes:
+      - application/json
+      description: Add a new health declaration with the input payload
+      parameters:
+      - description: Add health declaration
+        in: body
+        name: healthDeclaration
+        required: true
+        schema:
+          $ref: '#/definitions/entities.HealthDeclarationWithoutId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.HealthDeclaration'
+      summary: Add a new health declarations
+      tags:
+      - health-declarations
+  /api/v1/health-declarations/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get details health declaration of person
+      parameters:
+      - description: Get health declaration with ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.HealthDeclaration'
+      summary: Get details health declaration of person
+      tags:
+      - health-declarations
+    put:
+      consumes:
+      - application/json
+      description: Update health declaration with the input payload
+      parameters:
+      - description: ID health declaration need Update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Person
+        in: body
+        name: healthDeclaration
+        required: true
+        schema:
+          $ref: '#/definitions/entities.HealthDeclarationWithoutId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.HealthDeclaration'
+      summary: Update health declaration with id
+      tags:
+      - health-declarations
+  /api/v1/nationalitys:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all nationalitys
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Nationality'
+            type: array
+      summary: Get details of all nationalitys
+      tags:
+      - nationalitys
+  /api/v1/persons:
+    get:
+      consumes:
+      - application/json
+      description: Get details information of all persons
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Person'
+            type: array
+      summary: Get details information of all persons
+      tags:
+      - persons
+    post:
+      consumes:
+      - application/json
+      description: Create a new person infor with the input payload
+      parameters:
+      - description: Add Person
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/entities.PersonWithoutId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Person'
+      summary: Add a new person information
+      tags:
+      - persons
+  /api/v1/persons/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get details information of person
+      parameters:
+      - description: Get person with ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Person'
+      summary: Get details information of person
+      tags:
+      - persons
+    put:
+      consumes:
+      - application/json
+      description: Update person infor with the input payload
+      parameters:
+      - description: ID Person need Update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Person
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/entities.PersonWithoutId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Person'
+      summary: Update person information
+      tags:
+      - persons
+  /api/v1/provinces:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all provinces
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Province'
+            type: array
+      summary: Get details of all provinces
+      tags:
+      - provinces
+  /api/v1/questions:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all questions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Question'
+            type: array
+      summary: Get details of all questions
+      tags:
+      - questions
+    post:
+      consumes:
+      - application/json
+      description: Add a new question with the input payload
+      parameters:
+      - description: Add question
+        in: body
+        name: question
+        required: true
+        schema:
+          $ref: '#/definitions/entities.QuestionWithoutId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Question'
+      summary: Add a new question
+      tags:
+      - questions
+  /api/v1/questions/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get details question with id
+      parameters:
+      - description: Get question with ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Question'
+      summary: Get details question with id
+      tags:
+      - questions
+    put:
+      consumes:
+      - application/json
+      description: Update question with the input payload
+      parameters:
+      - description: ID question need Update
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update question
+        in: body
+        name: question
+        required: true
+        schema:
+          $ref: '#/definitions/entities.QuestionWithoutId'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Question'
+      summary: Update question with id
+      tags:
+      - questions
+  /api/v1/towns:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all towns
+      parameters:
+      - description: Get towns in province
+        in: query
+        name: province
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Town'
+            type: array
+      summary: Get details of all towns
+      tags:
+      - towns
+  /api/v1/villages:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all villages
+      parameters:
+      - description: Get villages in town
+        in: query
+        name: town
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Village'
+            type: array
+      summary: Get details of all villages
+      tags:
+      - villages
+swagger: "2.0"

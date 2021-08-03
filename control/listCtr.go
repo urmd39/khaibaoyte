@@ -1,12 +1,14 @@
 package control
 
 import (
+	"khaibaoyte/entities"
 	"log"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func GetListSex() (list []bson.M) {
+func GetGenders() (list []entities.Gender) {
 	client, ctx = Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("sex")
@@ -16,16 +18,20 @@ func GetListSex() (list []bson.M) {
 		log.Fatal(err)
 	}
 	for cursor.Next(ctx) {
-		var sex bson.M
-		if err = cursor.Decode(&sex); err != nil {
+		var gender entities.Gender
+		var g bson.M
+		if err = cursor.Decode(&g); err != nil {
 			log.Fatal(err)
 		}
-		list = append(list, sex)
+		bsonBytes, _ := bson.Marshal(g)
+		bson.Unmarshal(bsonBytes, &gender)
+		gender.GenderID = g["_id"].(primitive.ObjectID).Hex()
+		list = append(list, gender)
 	}
 	return list
 }
 
-func GetListNationality() (list []bson.M) {
+func GetNationalitys() (list []bson.M) {
 	client, ctx = Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("nationality")
@@ -44,7 +50,7 @@ func GetListNationality() (list []bson.M) {
 	return list
 }
 
-func GetListPerson() (list []bson.M) {
+func GetPersons() (list []bson.M) {
 	client, ctx = Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("person_info")
@@ -63,7 +69,7 @@ func GetListPerson() (list []bson.M) {
 	return list
 }
 
-func GetListProvince() (list []*bson.M) {
+func GetProvinces() (list []bson.M) {
 	client, ctx := Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("province")
@@ -77,12 +83,12 @@ func GetListProvince() (list []*bson.M) {
 		if err = cursor.Decode(&province); err != nil {
 			log.Fatal(err)
 		}
-		list = append(list, &province)
+		list = append(list, province)
 	}
 	return list
 }
 
-func GetListTown(province string) (list []bson.M) {
+func GetTowns(province string) (list []bson.M) {
 	client, ctx := Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("town")
@@ -101,7 +107,7 @@ func GetListTown(province string) (list []bson.M) {
 	return list
 }
 
-func GetListVillage(town string) (list []bson.M) {
+func GetVillages(town string) (list []bson.M) {
 	client, ctx := Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("village")
@@ -120,7 +126,7 @@ func GetListVillage(town string) (list []bson.M) {
 	return list
 }
 
-func GetListQuestion() (list []bson.M) {
+func GetQuestions() (list []bson.M) {
 	client, ctx := Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("question_answer")
@@ -139,7 +145,7 @@ func GetListQuestion() (list []bson.M) {
 	return list
 }
 
-func GetListHealthDeclaration() (list []bson.M) {
+func GetHealthDeclarations() (list []bson.M) {
 	client, ctx := Connected()
 	defer client.Disconnect(ctx)
 	collection := client.Database("khaibaoyte").Collection("health_declaration")

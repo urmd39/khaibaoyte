@@ -3,12 +3,19 @@ package main
 import (
 	"fmt"
 	"khaibaoyte/apis"
+	_ "khaibaoyte/docs"
 	"net/http"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
+// @title Health Declarations API
+// @version 1.0
+// @description This is a service for health declaration
+// @host localhost:8080
+// @BasePath /
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
@@ -18,38 +25,46 @@ func main() {
 		w.Write([]byte("Homepage"))
 	})
 
-	r.Route("/list", func(r chi.Router) {
-		// Get List
-		r.With(paginate).Get("/person", apis.ListPerson)
-		r.Get("/province", apis.ListProvince)
-		r.Get("/town", apis.ListTown)
-		r.Get("/village", apis.ListVillage)
-		r.Get("/sex", apis.ListSex)
-		r.Get("/nationality", apis.ListNationality)
-		r.Get("/question", apis.ListQuestion)
-		r.Get("/health_declaration", apis.ListHealthDeclaration)
-	})
+	r.Route("/api/v1/", func(r chi.Router) {
+		// Provinces
+		r.Get("/provinces", apis.GetProvinces)
 
-	r.Route("/person", func(r chi.Router) {
-		r.Post("/", apis.AddPerson)
-		r.Get("/{id}", apis.GetPerson)
-		r.Put("/{id}", apis.UpdatePerson)
-	})
+		// Towns
+		r.Get("/towns", apis.GetTowns)
 
-	r.Route("/health_declaration", func(r chi.Router) {
-		r.Post("/", apis.AddHealthDeclaration)
-		r.Get("/{id}", apis.GetHealthDeclaration)
-		r.Put("/{id}", apis.UpdateHealthDeclaration)
+		// Villages
+		r.Get("/villages", apis.GetVillages)
 
-		r.Post("/question", apis.AddQuestion)
-		r.Get("/question/{id}", apis.GetQuestion)
-		r.Put("/question/{id}", apis.UpdateQuestion)
+		// Genders
+		r.Get("/genders", apis.GetGenders)
+
+		// Nationalitys
+		r.Get("/nationalitys", apis.GetNationalitys)
+
+		// Person Info
+		r.With(paginate).Get("/persons", apis.GetPersons)
+		r.Post("/persons", apis.AddPerson)
+		r.Get("/persons/{id}", apis.GetPerson)
+		r.Put("/persons/{id}", apis.UpdatePerson)
+
+		// Health Declarations
+		r.Get("/health-declarations", apis.GetHealthDeclarations)
+		r.Post("/health-declarations", apis.AddHealthDeclaration)
+		r.Get("/health-declarations/{id}", apis.GetHealthDeclaration)
+		r.Put("/health-declarations/{id}", apis.UpdateHealthDeclaration)
+
+		// Questions
+		r.Get("/questions", apis.GetQuestions)
+		r.Post("/questions", apis.AddQuestion)
+		r.Get("/questions/{id}", apis.GetQuestion)
+		r.Put("/questions/{id}", apis.UpdateQuestion)
 	})
 
 	// Mount the admin sub-router
 	// r.Mount("/admin", adminRouter())
 
-	// Listen server at port 8080
+	// Port 8080
+	r.Mount("/swagger", httpSwagger.WrapHandler)
 	fmt.Println("Listen server at port 8080")
 	http.ListenAndServe(":8080", r)
 }
